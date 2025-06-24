@@ -1,25 +1,100 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Al Mahad Typing – Home</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Al Mahad Typing</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 </head>
 <body>
   <nav>
-    <div class="logo">Al Mahad Typing</div>
-    <div class="nav-links">
-      <a href="index.html">Home</a>
-      <a href="services.html">Services</a>
-      <a href="contact.html">Contact</a>
-      <a href="about.html">About</a>
+    <div class="container nav-container">
+      <div class="logo">Al Mahad Typing</div>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="services.html">Services</a>
+        <a href="contact.html">Contact</a>
+        <a href="about.html">About</a>
+      </div>
     </div>
   </nav>
 
-  <header class="hero">
-    <h1>Welcome to Al Mahad Typing</h1>
-    <p>Your trusted documentation partner in the UAE</p>
-    <a href="services.html" class="btn">Explore Services</a>
+  <header class="hero fade-in">
+    <div class="container">
+      <h1>Government‑Approved Typing Center</h1>
+      <p>Dubai's trusted typing & PRO services.</p>
+      <a href="services.html" class="btn primary">View Services</a>
+    </div>
   </header>
+
+  <section class="intro container slide-up">
+    <h2>Why Choose Al Mahad Typing?</h2>
+    <ul class="features">
+      <li>📄 Emirates ID & Passport Typing</li>
+      <li>✅ Police Clearance & Medical Typing</li>
+      <li>🚀 Fast & Friendly PRO Services</li>
+      <li>🕒 Quick turnaround time</li>
+    </ul>
+  </section>
+
+  <section class="services container">
+    <h2 class="slide-up">Our Services</h2>
+    <div class="cards">
+      <div class="card">
+        <h3>Passport Renewal</h3>
+        <p>Pakistani passport renewal.</p>
+        <span class="price">99 AED</span>
+      </div>
+      <div class="card">
+        <h3>Police Clearance</h3>
+        <p>Typing and fast PCC.</p>
+        <span class="price">99 AED</span>
+      </div>
+      <div class="card">
+        <h3>Emirates ID Typing</h3>
+        <p>New & renewal applications.</p>
+        <span class="price">99 AED</span>
+      </div>
+      <div class="card">
+        <h3>Medical Typing</h3>
+        <p>Health card and hospital forms.</p>
+        <span class="price">99 AED</span>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    gsap.registerPlugin(ScrollTrigger);
+
+    gsap.from(".fade-in", {
+      scrollTrigger: ".fade-in",
+      opacity: 0,
+      y: 50,
+      duration: 1,
+      ease: "power2.out",
+    });
+
+    gsap.from(".slide-up", {
+      scrollTrigger: ".slide-up",
+      opacity: 0,
+      y: 100,
+      duration: 1.2,
+      ease: "power4.out"
+    });
+
+    gsap.from(".card", {
+      scrollTrigger: {
+        trigger: ".cards",
+        start: "top 80%",
+      },
+      opacity: 0,
+      y: 80,
+      duration: 0.8,
+      stagger: 0.3,
+      ease: "power3.out"
+    });
+  </script>
 </body>
 </html>
