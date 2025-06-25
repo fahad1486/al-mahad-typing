@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Products – Al Mahad Typing</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <nav>
+    <div class="container nav-container">
+      <div class="logo">Al Mahad Typing</div>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="services.html">Services</a>
+        <a href="products.html">Shop</a>
+        <a href="contact.html">Contact</a>
+        <a href="about.html">About</a>
+      </div>
+    </div>
+  </nav>
+
+  <section class="products">
+    <h2>Shop Our Products</h2>
+    <div class="product-grid">
+      <div class="product-card">
+        <img src="https://via.placeholder.com/150" alt="Passport renewal" />
+        <h3>Passport Renewal Package</h3>
+        <p>Hassle-free renewal for your Pakistani passport.</p>
+        <span class="price">199 AED</span>
+        <a class="btn primary" href="checkout.html?product=passport">Buy Now</a>
+      </div>
+      <div class="product-card">
+        <img src="https://via.placeholder.com/150" alt="Police clearance" />
+        <h3>Police Clearance Service</h3>
+        <p>Complete assistance for PCC applications.</p>
+        <span class="price">149 AED</span>
+        <a class="btn primary" href="checkout.html?product=pcc">Buy Now</a>
+      </div>
+      <div class="product-card">
+        <img src="https://via.placeholder.com/150" alt="Emirates ID" />
+        <h3>Emirates ID Application</h3>
+        <p>New or renewal ID typing service.</p>
+        <span class="price">249 AED</span>
+        <a class="btn primary" href="checkout.html?product=eid">Buy Now</a>
+      </div>
+    </div>
+  </section>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script>
+    gsap.registerPlugin(ScrollTrigger);
+    gsap.from('.product-card', {
+      scrollTrigger: {
+        trigger: '.product-grid',
+        start: 'top 80%'
+      },
+      opacity: 0,
+      y: 80,
+      duration: 0.8,
+      stagger: 0.3,
+      ease: 'power3.out'
+    });
+  </script>
+</body>
+</html>
