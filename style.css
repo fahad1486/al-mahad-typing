@@ -21,8 +21,15 @@ nav {background:#002244}
 .card h3 {margin-bottom:10px}
 .price {display:block;margin-top:10px;color:#007700;font-size:1.2em;font-weight:bold}
 
+.product-grid{display:flex;flex-wrap:wrap;gap:20px;justify-content:center;margin-top:20px}
+.product-card{background:#fff;padding:20px;border-radius:6px;box-shadow:0 0 10px rgba(0,0,0,0.1);width:250px;text-align:center}
+.product-card img{width:100%;border-radius:4px;margin-bottom:10px}
+.checkout-form input{width:80%;max-width:300px;padding:10px;margin-top:5px}
+.checkout-form button{margin-top:15px}
+
 @media(max-width:600px){
   .nav-container {flex-direction:column}
   .cards {flex-direction:column;align-items:center}
+  .product-grid{flex-direction:column;align-items:center}
   .hero {padding:60px 20px}
 }
