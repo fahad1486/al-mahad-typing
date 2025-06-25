@@ -2,44 +2,115 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Our Services – Al Mahad Typing</title>
-  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Our Products – Al Mahad Typing</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-  <nav>
-    <div class="logo">Al Mahad Typing</div>
-    <div class="nav-links">
-      <a href="index.html">Home</a>
-      <a href="services.html">Services</a>
-      <a href="contact.html">Contact</a>
-      <a href="about.html">About</a>
+<body class="bg-gray-50 text-gray-800">
+  <!-- Navigation -->
+  <nav class="bg-white shadow-md">
+    <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+      <div class="text-2xl font-bold text-blue-600">Al Mahad Typing</div>
+      <div class="space-x-6">
+        <a href="index.html" class="text-gray-700 hover:text-blue-600">Home</a>
+        <a href="products.html" class="text-blue-600 font-medium">Products</a>
+        <a href="contact.html" class="text-gray-700 hover:text-blue-600">Contact</a>
+        <a href="about.html" class="text-gray-700 hover:text-blue-600">About</a>
+      </div>
     </div>
   </nav>
 
-  <section class="services">
-    <h2>Our Services</h2>
-    <div class="service-list">
-      <div class="card">
-        <h3>Passport Renewal</h3>
-        <p>We handle Pakistani passport renewals with ease.</p>
-        <span class="price">99 AED</span>
+  <!-- Products Section -->
+  <section id="products" class="container mx-auto px-6 py-12">
+    <h2 class="text-3xl font-semibold text-center mb-8">Our Products</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+
+      <!-- Passport Renewal Card -->
+      <div class="bg-white rounded-2xl shadow-lg p-6 flex flex-col">
+        <h3 class="text-xl font-semibold mb-2">Passport Renewal</h3>
+        <p class="text-gray-600 flex-grow">We handle Pakistani passport renewals with ease.</p>
+        <span class="mt-4 text-2xl font-bold text-blue-600">99 AED</span>
+        <button class="buy-now mt-4 bg-blue-600 text-white py-2 px-4 rounded" data-amount="9900" data-message="Passport Renewal – Al Mahad Typing">Buy Now</button>
       </div>
-      <div class="card">
-        <h3>Police Clearance Certificate</h3>
-        <p>Get your certificate typed & ready quickly.</p>
-        <span class="price">99 AED</span>
+
+      <!-- Police Clearance Certificate Card -->
+      <div class="bg-white rounded-2xl shadow-lg p-6 flex flex-col">
+        <h3 class="text-xl font-semibold mb-2">Police Clearance Certificate</h3>
+        <p class="text-gray-600 flex-grow">Get your certificate typed & ready quickly.</p>
+        <span class="mt-4 text-2xl font-bold text-blue-600">99 AED</span>
+        <button class="buy-now mt-4 bg-blue-600 text-white py-2 px-4 rounded" data-amount="9900" data-message="Police Clearance Certificate – Al Mahad Typing">Buy Now</button>
       </div>
-      <div class="card">
-        <h3>Emirates ID Typing</h3>
-        <p>Typing services for new and renewed ID applications.</p>
-        <span class="price">99 AED</span>
+
+      <!-- Emirates ID Typing Card -->
+      <div class="bg-white rounded-2xl shadow-lg p-6 flex flex-col">
+        <h3 class="text-xl font-semibold mb-2">Emirates ID Typing</h3>
+        <p class="text-gray-600 flex-grow">Typing services for new and renewed ID applications.</p>
+        <span class="mt-4 text-2xl font-bold text-blue-600">99 AED</span>
+        <button class="buy-now mt-4 bg-blue-600 text-white py-2 px-4 rounded" data-amount="9900" data-message="Emirates ID Typing – Al Mahad Typing">Buy Now</button>
       </div>
-      <div class="card">
-        <h3>Medical Typing</h3>
-        <p>Accurate and fast medical typing services.</p>
-        <span class="price">99 AED</span>
+
+      <!-- Medical Typing Card -->
+      <div class="bg-white rounded-2xl shadow-lg p-6 flex flex-col">
+        <h3 class="text-xl font-semibold mb-2">Medical Typing</h3>
+        <p class="text-gray-600 flex-grow">Accurate and fast medical typing services.</p>
+        <span class="mt-4 text-2xl font-bold text-blue-600">99 AED</span>
+        <button class="buy-now mt-4 bg-blue-600 text-white py-2 px-4 rounded" data-amount="9900" data-message="Medical Typing – Al Mahad Typing">Buy Now</button>
       </div>
+
     </div>
   </section>
+
+  <!-- Footer -->
+  <footer class="bg-white mt-12 py-6 shadow-inner">
+    <div class="container mx-auto px-6 text-center text-gray-600">
+      &copy; 2025 Al Mahad Typing. All rights reserved.
+    </div>
+  </footer>
+
+  <!-- Ziina Integration Script -->
+  <script>
+    document.querySelectorAll('.buy-now').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        btn.disabled = true;
+        const amountValue = parseInt(btn.dataset.amount, 10);
+        const message = btn.dataset.message;
+        try {
+          const response = await fetch('/create-payment-intent', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ amount: amountValue, message })
+          });
+
+          if (!response.ok) {
+            const errorText = await response.text();
+            console.error('Server error:', errorText);
+            alert(`Server error: ${response.status}`);
+            return;
+          }
+
+          const contentType = response.headers.get('content-type') || '';
+          if (contentType.includes('application/json')) {
+            const data = await response.json();
+            if (data.redirect_url) {
+              window.location.href = data.redirect_url;
+            } else {
+              console.error('Invalid JSON response:', data);
+              alert('Error: Invalid payment response format.');
+            }
+          } else {
+            const text = await response.text();
+            console.error('Unexpected response format:', text);
+            alert('Error: Unexpected server response format.');
+          }
+        } catch (error) {
+          console.error('Payment initiation failed:', error);
+          alert(`Payment initiation failed: ${error.message}`);
+        } finally {
+          btn.disabled = false;
+        }
+      });
+    });
+  </script>
 </body>
 </html>
